@@ -12,10 +12,10 @@ from concrete import fhe
 class FHEModelAggregator:
     """test_fhe_aggregation.pyの成功した技術を使ったモデル重み集約システム"""
     
-    def __init__(self, model_structure, num_clients=3, scale_factor=100, max_value=50):
+    def __init__(self, model_structure, num_clients=5, scale_factor=100, max_value=50):
         self.num_clients = num_clients
-        self.scale_factor = scale_factor  # 1000 → 10
-        self.max_value = max_value        # 新規追加: 20
+        self.scale_factor = scale_factor  
+        self.max_value = max_value     
         
         # モデル構造から重みの形状を取得
         self.weight_shapes = {}
@@ -307,7 +307,7 @@ class Client:
 class FHEServer:
     """FHE暗号化対応サーバー"""
     
-    def __init__(self, num_clients=3):
+    def __init__(self, num_clients=5):
         self.num_clients = num_clients
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         
@@ -370,8 +370,8 @@ class FHEServer:
 def main():
     print("=== 🔒 Federated Learning with FHE Encryption (Fixed Version) ===")
     
-    num_clients = 3
-    num_rounds = 3
+    num_clients = 5
+    num_rounds = 10
     
     # FHE対応サーバーを使用
     server = FHEServer(num_clients=num_clients)
